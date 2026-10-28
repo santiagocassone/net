@@ -39,6 +39,10 @@ El plan se comprime si el diagnóstico o los gates salen bien, y suma puentes si
 | Mié 18/11 | Bloques 7 y 8 | Gates 7 y 8 |
 | Jue 19/11 | Simulacro completo y lista de brechas | Brechas |
 
+## Sesiones con IA (bloque 10)
+
+Una sesión de ~1 h al día siguiente de aprobar cada gate del núcleo (1 a 4), al final de la jornada, nunca antes del trabajo a mano del día. Si el formato de la técnica permite IA, el simulacro del jueves 19/11 incluye una parte con IA.
+
 ## Fecha de la técnica
 
 - **Regla:** al pasar el gate 4, pedir la técnica para 7-10 días después.

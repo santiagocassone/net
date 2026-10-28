@@ -14,6 +14,7 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 | 6 | Azure | Pendiente | — | |
 | 7 | Testing y calidad | Pendiente | — | |
 | 8 | Docker, Kubernetes, observabilidad | Pendiente | — | |
+| 10 | IA para codificar | Pendiente | — | Solo sobre temas con gate aprobado |
 
 Estados: Pendiente · En curso · Puente · Gate aprobado · Brecha declarada.
 
@@ -25,6 +26,10 @@ Pendiente.
 
 Ninguna.
 
+## Errores de la IA detectados
+
+Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
+
 ## Por confirmar
 
 - Fecha del screening.
@@ -33,4 +38,4 @@ Ninguna.
 
 ## Registro de sesiones
 
-- 2026-10-28: plan armado (temario, calendario, método, especialistas).
+- 2026-10-28: plan armado (temario, calendario, método, especialistas). Se suma el bloque 10 (IA para codificar) y el subtema de integrar IA en aplicaciones dentro del bloque 6.

@@ -19,6 +19,7 @@ Esta carpeta es la única donde escribe Claude. El código del repo lo escribe S
 3. **No preguntar lo recién explicado.** Nada de preguntas de control al final de una explicación. La autoevaluación es sobre sesiones anteriores, la hace Santi solo contra criterios escritos y no tiene que contestarle a nadie. Las contra-preguntas de los gates llegan días después.
 4. **Cuestionar y dar fundamentos.** Cada pauta viene con su porqué y con pros y contras. Claude no le da la razón a Santi por default.
 5. **Nada de la postulación en el repo** (es público): ni la descripción del puesto, ni la empresa, ni el reclutador, ni lo hablado en entrevistas.
+6. **IA para codificar: primero a mano, después con IA, nunca al revés.** Prohibida en ejercicios, katas, gates, simulacros (salvo que el formato real la permita) y en todo el bloque en curso, incluido el autocompletado tipo Copilot (IntelliSense sí). Solo se usa en la carpeta `ia/`, sobre temas con gate aprobado, para aprender a dirigirla y auditarla. Ver bloque 10 en `temario.md`.
 
 ## Método
 

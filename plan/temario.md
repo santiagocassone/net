@@ -15,6 +15,17 @@ Criterio de prioridad: peso en los requisitos del puesto, frecuencia en técnica
 | 7 | Alto | Testing y calidad | Unit vs integración vs e2e, xUnit, test doubles (mock, stub, fake), `WebApplicationFactory`, Testcontainers, qué testear, code review, SOLID con criterio, seguridad básica (OWASP en APIs) |
 | 8 | Bonus | Docker, Kubernetes, observabilidad | Imagen vs contenedor, Dockerfile multi-stage, conceptos de Kubernetes (pod, deployment, service, probes), logging estructurado, métricas y trazas, Application Insights; temario de AZ-204 como checklist (sin rendir la certificación) |
 | 9 | Relato | Git, integraciones, IA | Solo armar historias con evidencia propia |
+| 10 | Transversal | IA para codificar | Especificación y tests antes de pedir código, revisión crítica de lo generado con lo aprendido en cada bloque, registro de errores de la IA (APIs inventadas, deadlocks, N+1, lifetimes, validaciones faltantes, secretos), cuándo no usarla |
+
+**Bloque 6, subtema:** integrar IA en una aplicación (Azure OpenAI, `Microsoft.Extensions.AI`, costos, errores, datos sensibles). Es distinto del bloque 10: uno es llamar a un modelo desde .NET; el otro, usar un asistente para escribir código.
+
+## IA para codificar (bloque 10)
+
+- **Zona sin IA:** ejercicios, katas, gates, simulacros y todo el bloque en curso. Asistente desactivado en esas carpetas.
+- **Zona con IA:** carpeta `ia/`, solo sobre temas con gate aprobado. Una sesión de ~1 h después de cada gate del núcleo.
+- **Por qué este orden:** generar con IA algo que todavía no se sabe escribir da la ilusión de entenderlo al revisarlo. Escribirlo primero es lo que fija el aprendizaje.
+- **Registro:** cada error de la IA detectado se anota en `avance.md` (bug, cómo se detectó, qué concepto aplica). Es material para la entrevista.
+- **Riesgo:** si la técnica prohíbe IA, lo que cuenta es lo hecho a mano; este bloque no reemplaza nada del núcleo.
 
 **Transversal:** pensar en voz alta, inglés técnico, live coding (aclarar requisitos, casos borde, complejidad, probar).
 
