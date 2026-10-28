@@ -22,11 +22,11 @@ El plan se comprime si el diagnóstico o los gates salen bien, y suma puentes si
 
 | Día | Foco | Cierre |
 |---|---|---|
-| Mié 28/10 | Screening (pitch, preguntas, tarifa). Diagnóstico. Bloque 1: colecciones, generics, delegates | Pitch grabado, diagnóstico hecho |
-| Jue 29/10 | Bloque 1: LINQ, records, nullable, `IDisposable`, excepciones, Framework vs .NET moderno | Ejercicio con tiempo |
-| Sáb 31/10 tarde | Repaso y gate 1 | Gate 1 |
-| Dom 1/11 | Bloque 2 completo | Ejercicios de bugs async |
-| Mar 3/11 | Recuperación, gate 2, primer simulacro | Gate 2 |
+| Mié 28/10 | Preparación y simulacro de screening. Diagnóstico (si hay energía; si no, pasa al jueves a la tarde) | Pitch grabado |
+| Jue 29/10 | Mañana sin estudio nuevo. Tarde: bloque 1 (colecciones, generics, delegates, LINQ) | Ejercicio con tiempo |
+| Sáb 31/10 tarde | Bloque 1: records, nullable, `IDisposable`, excepciones, Framework vs .NET moderno | — |
+| Dom 1/11 | Gate 1 y bloque 2 (primera parte) | Gate 1 |
+| Mar 3/11 | Recuperación, bloque 2 (segunda parte) y gate 2 | Gate 2 |
 | Mié 4/11 | Bloque 3: pipeline, DI, configuración, validación, errores | Endpoint desde cero |
 | Jue 5/11 | Bloque 3: REST y JWT | Gate 3 |
 | *Vie 6 – Lun 9* | *Corte* | |
