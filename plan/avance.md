@@ -6,10 +6,10 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
-| 1 | C# y .NET | Pendiente | — | |
+| 1 | C# y .NET | Pendiente | — | Arranca por LINQ: agrupación y agregación |
 | 2 | Async y concurrencia | Puente | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
 | 3 | ASP.NET Core y REST | Pendiente | — | Arranca por options pattern y validación/errores |
-| 4 | SQL y EF Core | Pendiente | — | |
+| 4 | SQL y EF Core | Puente | — | Arranca por SQL puro |
 | 5 | Arquitectura distribuida | Pendiente | — | |
 | 6 | Azure | Pendiente | — | |
 | 7 | Testing y calidad | Pendiente | — | |
@@ -26,7 +26,13 @@ En curso (2026-10-28). Resultados parciales:
 - **Bloque 2:** ítem 1 (`await`) S, con el matiz de que devuelve el control a quien llama. Ítem 2 (deadlock con `.Result`) N: no se entendió el mecanismo aun con explicación. Ítem 4 (`async void`) N. Ítems 3 y 5: S autoevaluadas. Ejercicio de código: en curso (consultó qué APIs usar → al menos D); lo evalúa Claude al terminar. Dos N → **el bloque 2 arranca por el puente**: hilo, thread pool, `Task`, continuación y contexto de sincronización, desde la base.
 - **Bloque 3:** ítems 1 (pipeline), 2 (lifetimes) y 5 (idempotencia) S autoevaluadas. Ítem 3 (options pattern) N e ítem 4 (validación y errores, ProblemDetails) N. Ejercicio de código: N (no lo pudo hacer). Sin puente (el puente definido, interfaces y DI, no cubre estas brechas): **el bloque 3 arranca por options pattern y validación/errores desde la base**, y por armar una minimal API desde cero.
 - **Bloque 4:** todo S autoevaluado (SQL y EF Core).
-- **Código de los bloques 1 y 2:** en una app de consola local, todavía sin subir al repo. Pendiente de revisión.
+- **Código revisado por Claude (`net/Program.cs`):**
+    - Bloque 1, LINQ: **N**. El filtro de fecha está invertido, no agrupa por cliente ni suma, y no limita a 3. Monto en `double`. Datos con 3 clientes.
+    - Bloque 2, async: **N**. El token no llega a ninguna tarea, así que no hay cancelación ni tope de 2 s; no se maneja la cancelación.
+    - Bloque 4, SQL: **N**. Consulta 1: `SUM(Id)` no cuenta, `HAVING` sobre una columna no agrupada y el filtro anula el `LEFT JOIN`. Consulta 2: correcta salvo agrupar por nombre. Consulta 3: agrupa por torneo, devuelve todos.
+    - El proyecto no compila (SQL dentro del `.cs`). `.vs/` y `obj/` están commiteados.
+- **Hallazgo principal:** la autoevaluación sobreestima. Bloques 1 y 4 se marcaron S y el código mostró N. Las S autoevaluadas necesitan validación externa.
+- **Decisión:** bloque 1 arranca por LINQ con agrupación y agregación; bloque 4 arranca por el puente de SQL puro.
 
 ## Brechas declaradas
 
