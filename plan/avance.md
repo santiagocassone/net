@@ -7,7 +7,7 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
 | 1 | C# y .NET | Pendiente | — | |
-| 2 | Async y concurrencia | Pendiente | — | |
+| 2 | Async y concurrencia | Puente | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
 | 3 | ASP.NET Core y REST | Pendiente | — | |
 | 4 | SQL y EF Core | Pendiente | — | |
 | 5 | Arquitectura distribuida | Pendiente | — | |
@@ -20,7 +20,10 @@ Estados: Pendiente · En curso · Puente · Gate aprobado · Brecha declarada.
 
 ## Diagnóstico
 
-Pendiente.
+En curso (2026-10-28). Resultados parciales:
+
+- **Bloque 1:** ítem 1 (value vs reference) D: dudaba de qué clasifican. Ítem 2 (delegates) D: dudas sobre `Func`/`Action`.
+- **Bloque 2:** ítem 1 (`await`) S, con el matiz de que devuelve el control a quien llama. Ítem 2 (deadlock con `.Result`) N: no se entendió el mecanismo aun con explicación → **el bloque 2 arranca por el puente**: hilo, thread pool, `Task`, continuación y contexto de sincronización, desde la base.
 
 ## Brechas declaradas
 
