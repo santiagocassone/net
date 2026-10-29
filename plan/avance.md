@@ -42,6 +42,10 @@ Ninguna.
 
 Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 
+## Checklist antes de la técnica
+
+- [ ] Asistente de IA del editor (Copilot / IntelliCode, completado de líneas): decidir si va prendido o apagado según las reglas del formato. Por defecto, apagado si comparto pantalla en live coding y no aclararon que se permite IA.
+
 ## Por confirmar
 
 - Fecha del screening.
