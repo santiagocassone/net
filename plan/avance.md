@@ -6,7 +6,7 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
-| 1 | C# y .NET | Pendiente | — | Arranca por LINQ: agrupación y agregación |
+| 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto |
 | 2 | Async y concurrencia | Puente | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
 | 3 | ASP.NET Core y REST | Pendiente | — | Arranca por options pattern y validación/errores |
 | 4 | SQL y EF Core | Puente | — | Arranca por SQL puro |
@@ -47,6 +47,11 @@ Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 - Fecha del screening.
 - Formato de la técnica.
 - Fecha de la técnica (regla en `calendario.md`).
+
+## Para la recuperación espaciada
+
+- Ejecución diferida: cada recorrido vuelve a ejecutar la consulta (con una base, otra consulta).
+- Materializar antes de tiempo (`ToList()` antes del `Where`) trae toda la tabla a memoria.
 
 ## Registro de sesiones
 
