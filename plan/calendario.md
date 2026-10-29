@@ -41,7 +41,16 @@ El plan se comprime si el diagnóstico o los gates salen bien, y suma puentes si
 
 ## Sesiones con IA (bloque 10)
 
-Una sesión de ~1 h al día siguiente de aprobar cada gate del núcleo (1 a 4), al final de la jornada, nunca antes del trabajo a mano del día. Si el formato de la técnica permite IA, el simulacro del jueves 19/11 incluye una parte con IA.
+Una sesión de ~1 h al día siguiente de aprobar cada gate del núcleo (1 a 4), al final de la jornada, nunca antes del trabajo a mano del día. Se reparte a lo largo del plan, no al final, porque también se puede evaluar en la técnica.
+
+| Gate (fecha prevista) | Sesión con IA | Tema |
+|---|---|---|
+| 1, dom 1/11 | mar 3/11, al cierre | LINQ, delegates, records |
+| 2, mar 3/11 | mié 4/11, al cierre | Async |
+| 3, jue 5/11 | mar 10/11, al cierre | ASP.NET Core y REST |
+| 4, jue 12/11 | sáb 14/11 | SQL y EF Core |
+
+Si un gate se atrasa, su sesión con IA se corre con él. Si el formato de la técnica permite IA, el simulacro final incluye una parte con IA.
 
 ## Fecha de la técnica
 
