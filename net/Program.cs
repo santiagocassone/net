@@ -37,6 +37,22 @@ var result = tournaments
     .ThenBy(g => g.Club)
     .ToList();
 
+// Cuenta uno mas luego de agregar el torneo.
+var futureTournaments = tournaments.Where(t => t.StartsAt > today);
+Console.WriteLine(futureTournaments.Count());
+tournaments.Add(new Tournament("Club Norte", today.AddDays(5), 15500m, Category.Cuarta));
+Console.WriteLine(futureTournaments.Count());
+
+// se incrementa cada vez que se ejecuta la consulta
+int counter = 0;
+var futureTournaments2 = tournaments.Where(x => { counter++; return x.StartsAt > today; });
+futureTournaments2.Count();
+futureTournaments2.ToList();
+Console.WriteLine(counter);
+
+// el primero ejecuta el where en el operador de DB y el segundo en memoria.
+
+
 public enum Category { Primera, Segunda, Tercera, Cuarta, Quinta, Sexta, Septima }
 
 public record Tournament(string Club, DateTime StartsAt, decimal Price, Category Category);
