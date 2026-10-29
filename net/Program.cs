@@ -1,5 +1,7 @@
 ﻿
 //Bloque 1 LINQ
+using System.Security.Cryptography.X509Certificates;
+
 var today = DateTime.Today;
 
 var tournaments = new List<Tournament>
@@ -51,6 +53,116 @@ futureTournaments2.ToList();
 Console.WriteLine(counter);
 
 // el primero ejecuta el where en el operador de DB y el segundo en memoria.
+
+static List<T> Filter<T>(List<T> items, Func<T, bool> condition)
+{
+    var result = new List<T>();
+    foreach (var item in items)
+    {
+        if (condition(item))
+        {
+            result.Add(item);
+        }
+    }
+    return result;
+}
+
+var tournaments3 = Filter(tournaments, x => x.Price > 15000m);
+var tournaments4 = Filter(tournaments, x => x.Club == "Club Norte");
+
+
+static void Print(Action<string> voidFunc)
+{
+    voidFunc("Hola mundo");
+}
+
+Print(message => Console.WriteLine(message));
+Print(message => { List<string> list = new List<string> { message }; });
+
+var functions = new List<Func<int>>();
+
+for (int i = 0; i < 3; i++)
+{
+    functions.Add(() => i);
+}
+
+foreach (var func in functions)
+{
+    Console.WriteLine(func());
+}
+
+var functions2 = new List<Func<int>>();
+
+foreach (var item in new[] { 0, 1, 2 })
+{
+    functions2.Add(() => item);
+}
+
+foreach (var func in functions2)
+{
+    Console.WriteLine(func());
+}
+
+Bule first = new Bule { x = 1 };
+Bule second = first;
+second.x = 99;
+// imprime 1
+Console.WriteLine(first.x);
+
+
+Bule2 first2 = new Bule2 { x = 1 };
+Bule2 second2 = first2;
+second2.x = 99;
+// imprime 99
+Console.WriteLine(first2.x);
+
+List<int> numbers = new List<int> { 1, 2 };
+
+AddNumber(numbers);
+
+// imprime 1, 2, 3
+Console.WriteLine(string.Join(", ", numbers));
+
+AddNumber2(numbers);
+// imprime 1, 2, 3
+Console.WriteLine(string.Join(", ", numbers));
+
+AddNumber3(ref numbers);
+// imprime 99
+Console.WriteLine(string.Join(", ", numbers));
+
+static void AddNumber(List<int> numbers)
+{
+    numbers.Add(3);
+}
+
+static void AddNumber2(List<int> numbers)
+{
+    numbers = new List<int> { 99 };
+}
+
+static void AddNumber3(ref List<int> numbers)
+{
+    numbers = new List<int> { 99 };
+}
+
+string asdf = "a";
+string qwer = asdf;
+qwer += "b";
+// imprime a
+Console.WriteLine(asdf);
+
+
+struct Bule
+{
+    public int x { get; set; }
+};
+
+class Bule2
+{
+    public int x { get; set; }
+}
+
 
 
 public enum Category { Primera, Segunda, Tercera, Cuarta, Quinta, Sexta, Septima }
