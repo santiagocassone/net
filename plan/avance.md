@@ -48,6 +48,11 @@ Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 - Formato de la técnica.
 - Fecha de la técnica (regla en `calendario.md`).
 
+## Temas postergados a propósito
+
+- Árboles de expresión: se ven en el bloque 4 (EF Core), mirando el SQL generado.
+- Events: prioridad baja para backend; repaso breve al final del bloque 1 si sobra tiempo.
+
 ## Para la recuperación espaciada
 
 - Ejecución diferida: cada recorrido vuelve a ejecutar la consulta (con una base, otra consulta).
