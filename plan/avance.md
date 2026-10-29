@@ -57,6 +57,12 @@ Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 
 - Ejecución diferida: cada recorrido vuelve a ejecutar la consulta (con una base, otra consulta).
 - Materializar antes de tiempo (`ToList()` antes del `Where`) trae toda la tabla a memoria.
+- Si necesitás las filas, materializá una vez y reusá; si solo necesitás un número (`Count`, `Any`), pedíselo a la base.
+- `Func` devuelve un valor (el último tipo es el de retorno); `Action` no devuelve nada.
+- Pasar una lambda = pasar el "qué"; el que la recibe decide "cuándo" y con qué datos (`Where`, `MapGet`, middleware, `Configure`).
+- `<T>` después del nombre del método declara el tipo genérico; el resto de la firma lo usa.
+- Closure = función + variables capturadas; captura la variable, no su valor, y le extiende la vida.
+- Trampa: en `for` hay una sola variable para todas las vueltas; en `foreach` (desde C# 5), una por vuelta.
 
 ## Registro de sesiones
 
