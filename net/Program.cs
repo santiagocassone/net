@@ -1,59 +1,38 @@
-﻿using net;
-using System.Xml.Linq;
+﻿
+//Bloque 1 LINQ
+var today = DateTime.Today;
 
-// Bloque 1
-var orders = new List<Order>
+var tournaments = new List<Tournament>
 {
-    new Order(1, 100.0, DateTime.Today - TimeSpan.FromDays(40), State.Completed),
-    new Order(2, 200.0, DateTime.Now, State.Processing),
-    new Order(3, 150.0, DateTime.Now, State.Pending),
-    new Order(1, 200.0, DateTime.Now, State.Completed),
-    new Order(1, 300.0, DateTime.Now, State.Completed),
-    new Order(1, 400.0, DateTime.Now, State.Completed)
+    // Club Norte: 3 futuros, 1 pasado
+    new("Club Norte", today.AddDays(2),   15000m, Category.Cuarta),
+    new("Club Norte", today.AddDays(10),  18000m, Category.Quinta),
+    new("Club Norte", today.AddDays(25),  16000m, Category.Sexta),
+    new("Club Norte", today.AddDays(-5),  14000m, Category.Cuarta),
+
+    // Padel Sur: 2 futuros (empata con Arena Oeste)
+    new("Padel Sur",  today.AddDays(1),   20000m, Category.Tercera),
+    new("Padel Sur",  today.AddDays(30),  22000m, Category.Cuarta),   // límite exacto
+    new("Padel Sur",  today.AddDays(45),  21000m, Category.Quinta),   // fuera del rango
+
+    // Arena Oeste: 2 futuros (empata con Padel Sur)
+    new("Arena Oeste", today.AddDays(7),  12000m, Category.Sexta),
+    new("Arena Oeste", today.AddDays(14), 13000m, Category.Septima),
+
+    // Centro Padel: 1 futuro (no debería aparecer)
+    new("Centro Padel", today.AddDays(3), 17000m, Category.Segunda),
+    new("Centro Padel", today.AddDays(-20), 17000m, Category.Segunda),
+
+    // Club Este: solo pasados (no debería aparecer)
+    new("Club Este",  today.AddDays(-1),  19000m, Category.Primera),
+    new("Club Este",  today.AddDays(-15), 19000m, Category.Primera),
 };
 
-var result = orders.Where(o => o.CreatedAt < DateTime.Today - TimeSpan.FromDays(30) && o.State == State.Completed).OrderByDescending(o => o.Amount).ToList();
+var result = tournaments.Where(t => t.StartsAt > today && t.StartsAt < today.AddDays(30)).GroupBy(t => t.Club).Select(t => new { Club = t.Key, TournamentCount = t.Count() }).Where(t => t.TournamentCount >= 2).OrderBy(t => t.TournamentCount).ThenBy(t => t.Club).ToList();
+
+public enum Category { Primera, Segunda, Tercera, Cuarta, Quinta, Sexta, Septima }
+
+public record Tournament(string Club, DateTime StartsAt, decimal Price, Category Category);
 
 
-//Bloque 2
 
-var task1 = Task.Delay(1000);
-var task2 = Task.Delay(1500);
-var task3 = Task.Delay(3000);
-var task4 = Task.Delay(4000);
-var task5 = Task.Delay(5000);
-
-var cancellationTokenSource = new CancellationTokenSource();
-
-cancellationTokenSource.CancelAfter(2000);
-
-await WaitForAllTasksAsync(cancellationTokenSource.Token);
-
-async Task<bool> WaitForAllTasksAsync(CancellationToken cancellationToken)
-{
-    var tasks = new List<Task> { task1, task2, task3, task4, task5 };
-    await Task.WhenAll(tasks);
-    return true;
-}
-
-//Bloque 4
-
-SELECT cl.Name, SUM(tr.Id) AS TournamentsCount
-    FROM Clubs cl
-        LEFT JOIN Tournaments tr
-    ON cl.Id = tr.ClubId
-    GROUP BY cl.Name
-    HAVING tr.StartsAt >= GETDATE() AND tr.StartsAt <= DATEADD(DAY, 30, GETDATE());
-
-SELECT cl.Name, AVG(tr.Price) AS AveragePrice
-    FROM Clubs cl
-        LEFT JOIN Tournaments tr
-    ON cl.Id = tr.ClubId
-    GROUP BY cl.Name;
-
-
-SELECT cl.Name, tr.Id, MAX(tr.Price) AS MaxPrice
-    FROM Clubs cl
-        LEFT JOIN Tournaments tr
-    ON cl.Id = tr.ClubId
-    GROUP BY cl.Name, tr.Id;
