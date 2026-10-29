@@ -28,7 +28,14 @@ var tournaments = new List<Tournament>
     new("Club Este",  today.AddDays(-15), 19000m, Category.Primera),
 };
 
-var result = tournaments.Where(t => t.StartsAt > today && t.StartsAt < today.AddDays(30)).GroupBy(t => t.Club).Select(g => new { Club = g.Key, TournamentCount = g.Count(), AveragePrice = g.Average(g => g.Price) }).Where(g => g.TournamentCount >= 2).OrderBy(g => g.TournamentCount).ThenByDescending(t => t.Club).ToList();
+var result = tournaments
+    .Where(t => t.StartsAt > today && t.StartsAt < today.AddDays(30))
+    .GroupBy(t => t.Club)
+    .Select(g => new { Club = g.Key, TournamentCount = g.Count(), AveragePrice = g.Average(x => x.Price) })
+    .Where(g => g.TournamentCount >= 2)
+    .OrderByDescending(g => g.TournamentCount)
+    .ThenBy(g => g.Club)
+    .ToList();
 
 public enum Category { Primera, Segunda, Tercera, Cuarta, Quinta, Sexta, Septima }
 
