@@ -6,7 +6,7 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
-| 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto. Delegates/`Func`/`Action`: ejercicio hecho (29/10); el `Action` que guarda en lista no capturaba una lista externa. Closures (`for` vs `foreach`): entendido (29/10). Value vs reference: las 4 predicciones correctas (29/10). Records y nullable: correcto (29/10), faltó anotar predicción del `ToString` y la advertencia del compilador. Pendiente: `IDisposable`, excepciones, Framework vs .NET moderno |
+| 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto. Delegates/`Func`/`Action`: ejercicio hecho (29/10); el `Action` que guarda en lista no capturaba una lista externa. Closures (`for` vs `foreach`): entendido (29/10). Value vs reference: las 4 predicciones correctas (29/10). Records y nullable: correcto (29/10), faltó anotar predicción del `ToString` y la advertencia del compilador. `IDisposable`/`using`: puntos 1-2 bien (30/10); punto 3 pendiente de rehacer con el `try` afuera del `using`. Pendiente: excepciones, Framework vs .NET moderno |
 | 2 | Async y concurrencia | Puente | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
 | 3 | ASP.NET Core y REST | Pendiente | — | Arranca por options pattern y validación/errores |
 | 4 | SQL y EF Core | Puente | — | Arranca por SQL puro |
@@ -67,6 +67,8 @@ Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 - `<T>` después del nombre del método declara el tipo genérico; el resto de la firma lo usa.
 - Closure = función + variables capturadas; captura la variable, no su valor, y le extiende la vida.
 - Trampa: en `for` hay una sola variable para todas las vueltas; en `foreach` (desde C# 5), una por vuelta.
+- `using` = `try/finally` que llama a `Dispose()` siempre, aun con excepción.
+- `HttpClient` por pedido → cada `Dispose` deja el puerto en `TIME_WAIT` → se agotan los puertos locales. Un único cliente eterno → no ve cambios de DNS. Solución: `IHttpClientFactory`.
 
 ## Registro de sesiones
 
