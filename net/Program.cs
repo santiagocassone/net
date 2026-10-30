@@ -173,12 +173,62 @@ Console.WriteLine(data3.ToString());
 Console.WriteLine(Counter(null));
 Console.WriteLine(Counter("asdf"));
 
-// un entero nullable es un nuevo tipo struct con dos propiedades: HasValue y Value, un string nullable simplemente emite warnings cuando no se comprueba si es null antes de usarlo.
 
+
+// un entero nullable es un nuevo tipo struct con dos propiedades: HasValue y Value, un string nullable simplemente emite warnings cuando no se comprueba si es null antes de usarlo.
 static int Counter(string? name)
 {
     return name?.Length ?? 0;
 }
+
+
+//using (var fakeConnection = new FakeConnection())
+//{
+//    fakeConnection.Query();
+//}
+
+//Console.WriteLine("Fin del bloque");
+
+// Conexión abierta -> Consultando -> Conexión cerrada -> Fin del bloque
+
+using (var fakeConnection = new FakeConnection())
+{
+    try
+    {
+        fakeConnection.Query();
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Error capturado");
+    }
+    
+}
+
+// Conexión abierta -> Error capturado -> Conexión cerrada
+
+
+// porque httpclient se reutiliza y si cerramos todos los request cuando finalizan se agotan los sockets.
+
+
+class FakeConnection : IDisposable
+{
+    public FakeConnection()
+    {
+        Console.WriteLine("Conexión abierta");
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine("Conexión cerrada");
+    }
+
+    public void Query()
+    {
+        throw new Exception();
+    }
+}
+
+
 
 class Datas2
 {
