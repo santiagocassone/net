@@ -1,5 +1,6 @@
 ﻿
 //Bloque 1 LINQ
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
 var today = DateTime.Today;
@@ -152,6 +153,46 @@ qwer += "b";
 // imprime a
 Console.WriteLine(asdf);
 
+
+
+Datas data1 = new("Juan", "Madrid");
+Datas data2 = new("Juan", "Madrid");
+
+Console.WriteLine(data1 == data2); // true
+
+
+Datas2 datas1 = new("Juan", "Madrid");
+Datas2 datas2 = new("Juan", "Madrid");
+Console.WriteLine(datas1 == datas2); // false
+
+Datas data3 = data1 with { City = "Barcelona" };
+
+Console.WriteLine(data1.ToString());
+Console.WriteLine(data3.ToString());
+
+Console.WriteLine(Counter(null));
+Console.WriteLine(Counter("asdf"));
+
+// un entero nullable es un nuevo tipo struct con dos propiedades: HasValue y Value, un string nullable simplemente emite warnings cuando no se comprueba si es null antes de usarlo.
+
+static int Counter(string? name)
+{
+    return name?.Length ?? 0;
+}
+
+class Datas2
+{
+    public string Name { get; set; }
+    public string City { get; set; }
+    public Datas2(string name, string city)
+    {
+        Name = name;
+        City = city;
+    }
+}
+
+
+record Datas(string Name, string City);
 
 struct Bule
 {
