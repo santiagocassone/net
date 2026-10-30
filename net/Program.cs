@@ -191,23 +191,57 @@ static int Counter(string? name)
 
 // Conexión abierta -> Consultando -> Conexión cerrada -> Fin del bloque
 
-using (var fakeConnection = new FakeConnection())
-{
+
     try
     {
+    using (var fakeConnection = new FakeConnection())
+    {
         fakeConnection.Query();
+
     }
+}
     catch (Exception)
     {
         Console.WriteLine("Error capturado");
     }
-    
-}
 
-// Conexión abierta -> Error capturado -> Conexión cerrada
+// Conexión abierta -> Conexión cerrada -> Error capturado
 
 
 // porque httpclient se reutiliza y si cerramos todos los request cuando finalizan se agotan los sockets.
+
+Level1();
+// el origen del error es el método Level3
+
+static void Level3()
+{
+    throw new InvalidOperationException();
+}
+
+static void Level2()
+{
+    try
+    {
+        Level3();
+    }
+    catch (Exception)
+    {
+
+        throw;
+    }
+}
+
+static void Level1()
+{
+    try
+    {
+        Level2();
+    }
+    catch (Exception ex)
+    {
+        Console.Write(ex.ToString());
+    }
+}
 
 
 class FakeConnection : IDisposable
