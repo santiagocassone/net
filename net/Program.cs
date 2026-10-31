@@ -1,5 +1,5 @@
-﻿
-//Bloque 1 LINQ
+﻿//Bloque 1 LINQ
+using System.Collections.Concurrent;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
@@ -210,6 +210,8 @@ static int Counter(string? name)
 
 // porque httpclient se reutiliza y si cerramos todos los request cuando finalizan se agotan los sockets.
 
+TournamentSignup(6, 5);
+//imprime Tournament Full
 Level1();
 // el origen del error es el método Level3
 
@@ -244,6 +246,25 @@ static void Level1()
 }
 
 
+static void TournamentSignup(int participants, int places)
+{
+    try
+    {
+        if (participants > places)
+            throw new TournamentFullException("Participants cannot exceed places");
+    }
+    catch (TournamentFullException)
+    {
+        Console.WriteLine("Tournament Full");
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Unexpected Error");
+    }
+
+}
+
+
 class FakeConnection : IDisposable
 {
     public FakeConnection()
@@ -263,6 +284,13 @@ class FakeConnection : IDisposable
 }
 
 
+
+class TournamentFullException : Exception 
+{
+    public TournamentFullException(string message) : base(message)
+    {
+    }
+}
 
 class Datas2
 {
