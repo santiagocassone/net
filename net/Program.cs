@@ -1,6 +1,7 @@
 ﻿//Bloque 1 LINQ
 using System.Collections.Concurrent;
 using System.Data;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
 var today = DateTime.Today;
@@ -210,7 +211,19 @@ static int Counter(string? name)
 
 // porque httpclient se reutiliza y si cerramos todos los request cuando finalizan se agotan los sockets.
 
-TournamentSignup(6, 5);
+try
+{
+    TournamentSignup(6, 5);
+}
+catch (TournamentFullException)
+{
+    Console.WriteLine("Tournament Full");
+}
+catch (Exception)
+{
+    Console.WriteLine("Unexpected Error");
+}
+
 //imprime Tournament Full
 Level1();
 // el origen del error es el método Level3
@@ -226,10 +239,10 @@ static void Level2()
     {
         Level3();
     }
-    catch (Exception)
+    catch (Exception ex)
     {
-
-        throw;
+        //ahora el stack trace va a ignorar la expcepción lanzada en level 1
+        throw ex;
     }
 }
 
@@ -248,19 +261,8 @@ static void Level1()
 
 static void TournamentSignup(int participants, int places)
 {
-    try
-    {
         if (participants > places)
             throw new TournamentFullException("Participants cannot exceed places");
-    }
-    catch (TournamentFullException)
-    {
-        Console.WriteLine("Tournament Full");
-    }
-    catch (Exception)
-    {
-        Console.WriteLine("Unexpected Error");
-    }
 
 }
 
