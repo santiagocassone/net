@@ -6,8 +6,8 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
-| 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto. Delegates/`Func`/`Action`: ejercicio hecho (29/10); el `Action` que guarda en lista no capturaba una lista externa. Closures (`for` vs `foreach`): entendido (29/10). Value vs reference: las 4 predicciones correctas (29/10). Records y nullable: correcto (29/10), faltó anotar predicción del `ToString` y la advertencia del compilador. `IDisposable`/`using`: aprobado (31/10). Excepciones: `throw;` bien; pendiente `throw ex;`, mover el `catch` al caller e invertir el orden de los `catch` (31/10). Pendiente: Framework vs .NET moderno |
-| 2 | Async y concurrencia | Puente | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
+| 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto. Delegates/`Func`/`Action`: ejercicio hecho (29/10); el `Action` que guarda en lista no capturaba una lista externa. Closures (`for` vs `foreach`): entendido (29/10). Value vs reference: las 4 predicciones correctas (29/10). Records y nullable: correcto (29/10), faltó anotar predicción del `ToString` y la advertencia del compilador. `IDisposable`/`using`: aprobado (31/10). Excepciones: aprobado (31/10). Framework vs .NET moderno: explicado (31/10); pendiente opcional, escribir la historia de su migración a .NET 8. **Temas del bloque 1 completos; gate 1 el dom 1/11** |
+| 2 | Async y concurrencia | Puente (en curso 31/10) | — | Arranca por hilo, thread pool, `Task`, continuación y contexto |
 | 3 | ASP.NET Core y REST | Pendiente | — | Arranca por options pattern y validación/errores |
 | 4 | SQL y EF Core | Puente | — | Arranca por SQL puro |
 | 5 | Arquitectura distribuida | Pendiente | — | |
