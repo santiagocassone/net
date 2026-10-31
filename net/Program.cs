@@ -1,6 +1,7 @@
 ﻿//Bloque 1 LINQ
 using System.Collections.Concurrent;
 using System.Data;
+using System.Diagnostics;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
@@ -225,8 +226,104 @@ catch (Exception)
 }
 
 //imprime Tournament Full
-Level1();
+//Level1();
 // el origen del error es el método Level3
+
+
+//////////////////////////////// BLOQUE 2 ///////////////////////////////////////
+
+await PrintThreadId();
+/// van a ser distintos porque el await libera al hilo. pueden ser iguales de casualidad
+
+var time = Stopwatch.StartNew();
+
+//10.000 ms
+await CallSleep();
+
+//1.000 ms
+await CallDelay();
+
+Console.WriteLine(ThreadPool.GetMinThreads);
+
+time.Stop();
+
+var cancellationToken = new CancellationTokenSource();
+cancellationToken.CancelAfter(2000);
+List<Task> taskList = new List<Task>();
+taskList.Add(NamedTask("Culo", 1000, cancellationToken.Token));
+taskList.Add(NamedTask("Caca", 1500, cancellationToken.Token));
+taskList.Add(NamedTask("Concha", 3000, cancellationToken.Token));
+taskList.Add(NamedTask("Pedo", 4000, cancellationToken.Token));
+taskList.Add(NamedTask("No te enojes por los nombres, Diógenes", 5000, cancellationToken.Token));
+
+time.Restart();
+Console.WriteLine(time.ElapsedMilliseconds + " Start");
+try
+{
+    await Task.WhenAll(taskList);
+}
+catch (OperationCanceledException)
+{
+    Console.WriteLine("Cancelado");
+}
+
+Console.WriteLine(time.ElapsedMilliseconds + " End");
+
+//se imprimen Culo y Caca
+
+
+
+
+async Task NamedTask(string name, int duration, CancellationToken cancellationToken)
+{
+    await Task.Delay(duration, cancellationToken);
+    Console.WriteLine(name + "Ended");
+}
+
+async Task CallSleep()
+{
+    List<Task> SleepTasks = new List<Task>();
+    for (int i = 0; i < 10; i++)
+    {
+        SleepTasks.Add(Task.Run(SleepMethod));
+    }
+    Console.WriteLine(time.ElapsedMilliseconds + "Sleeps started");
+    await Task.WhenAll(SleepTasks);
+    Console.WriteLine(time.ElapsedMilliseconds + "Sleeps done");
+}
+
+async Task CallDelay()
+{
+    List<Task> DelayTasks = new List<Task>();
+    for (int i = 0; i < 10; i++)
+    {
+        DelayTasks.Add(Task.Run(SleepMethod));
+    }
+    Console.WriteLine(time.ElapsedMilliseconds + "Delays started");
+    await Task.WhenAll(DelayTasks);
+    Console.WriteLine(time.ElapsedMilliseconds + "Delays done");
+}
+
+async Task SleepMethod()
+{
+    Thread.Sleep(1000);
+}
+
+async Task DelayMethod()
+{
+    Task.Delay(1000);
+}
+
+
+
+
+
+async Task PrintThreadId()
+{
+    Console.WriteLine(Environment.CurrentManagedThreadId);
+    await Task.Delay(1000);
+    Console.WriteLine(Environment.CurrentManagedThreadId);
+}
 
 static void Level3()
 {
