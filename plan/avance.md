@@ -7,7 +7,7 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 | # | Bloque | Estado | Gate | Notas |
 |---|---|---|---|---|
 | 1 | C# y .NET | En curso | — | LINQ agrupación/agregación: ejercicio aprobado (29/10). `IEnumerable` vs `IQueryable` y ejecución diferida: ejercicio hecho (29/10), punto 3 incompleto. Delegates/`Func`/`Action`: ejercicio hecho (29/10); el `Action` que guarda en lista no capturaba una lista externa. Closures (`for` vs `foreach`): entendido (29/10). Value vs reference: las 4 predicciones correctas (29/10). Records y nullable: correcto (29/10), faltó anotar predicción del `ToString` y la advertencia del compilador. `IDisposable`/`using`: aprobado (31/10). Excepciones: aprobado (31/10). Framework vs .NET moderno: explicado (31/10); pendiente opcional, escribir la historia de su migración a .NET 8. **Temas del bloque 1 completos; gate 1 el dom 1/11** |
-| 2 | Async y concurrencia | Puente hecho (31/10) | — | Puente: hilo, pool, bloquear vs no bloquear, `Task`, continuación, contexto y deadlock, entendidos. Experimento con 1.000 tareas salteado. `CancellationToken` + `WhenAll`: implementación correcta (31/10), predicción incompleta (tiempo total y "Cancelado"). `async void`: explicado, ejercicio descartado por Santi; retener la regla de una línea. Hallazgo: `DelayMethod` sin `await` y `CallDelay` llamando a `SleepMethod`. Sigue: concurrencia (`lock`, `SemaphoreSlim`, colecciones concurrentes), `ConfigureAwait`, `ValueTask` |
+| 2 | Async y concurrencia | Puente hecho (31/10) | — | Puente: hilo, pool, bloquear vs no bloquear, `Task`, continuación, contexto y deadlock, entendidos. Experimento con 1.000 tareas salteado. `CancellationToken` + `WhenAll`: implementación correcta (31/10), predicción incompleta (tiempo total y "Cancelado"). `async void`: explicado, ejercicio descartado por Santi; retener la regla de una línea. Hallazgo: `DelayMethod` sin `await` y `CallDelay` llamando a `SleepMethod`. Concurrencia (31/10): race condition vista en ejecución, `Interlocked` y `lock` correctos, `SemaphoreSlim` bien armado (corrigió la trampa de closure en el `for`). Sigue: `ConfigureAwait`, `ValueTask`, colecciones concurrentes en práctica |
 | 3 | ASP.NET Core y REST | Pendiente | — | Arranca por options pattern y validación/errores |
 | 4 | SQL y EF Core | Puente | — | Arranca por SQL puro |
 | 5 | Arquitectura distribuida | Pendiente | — | |
@@ -68,6 +68,10 @@ Ninguno todavía. Formato: bug · cómo se detectó · concepto que aplica.
 - Closure = función + variables capturadas; captura la variable, no su valor, y le extiende la vida.
 - Trampa: en `for` hay una sola variable para todas las vueltas; en `foreach` (desde C# 5), una por vuelta.
 - `using` = `try/finally` que llama a `Dispose()` siempre, aun con excepción.
+- Esperar I/O no requiere hilo: la red y la base trabajan; el SO avisa y recién ahí se pide un hilo para la continuación.
+- `async void` solo en event handlers: no se puede esperar y sus excepciones no se capturan.
+- Cancelación cooperativa: el token hay que pasarlo hasta el fondo; si nadie lo mira, nada se cancela.
+- Herramienta más chica: un número → `Interlocked`; varios datos sin `await` → `lock`; con `await` o máximo N → `SemaphoreSlim`. Todo esto vale para un solo proceso; con varias réplicas, coordinar en la base o en Redis.
 - `HttpClient` por pedido → cada `Dispose` deja el puerto en `TIME_WAIT` → se agotan los puertos locales. Un único cliente eterno → no ve cambios de DNS. Solución: `IHttpClientFactory`.
 
 ## Registro de sesiones
