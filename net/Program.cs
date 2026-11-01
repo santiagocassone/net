@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
@@ -270,6 +271,84 @@ catch (OperationCanceledException)
 Console.WriteLine(time.ElapsedMilliseconds + " End");
 
 //se imprimen Culo y Caca
+
+
+
+
+
+using var semaphore = new SemaphoreSlim(3);
+async Task ProcessNumber(int number)
+{
+    await semaphore.WaitAsync();
+    try
+    {
+        Console.WriteLine("Enters " + number);
+        await Task.Delay(1000);
+        Console.WriteLine("Exits " + number);
+    }
+    finally
+    {
+        semaphore.Release();
+    }
+}
+
+var numberTasks = new List<Task>();
+for (int i = 0; i < 9; i++)
+{
+    numberTasks.Add(Task.Run(() => ProcessNumber(i)));
+}
+await Task.WhenAll(numberTasks);
+///tres Entra al principio, tarda 3 segundos en total
+
+
+
+int contador = 0;
+List<Task> counterTasks = new List<Task>();
+for (int i = 0; i < 1000; i++)
+{
+    counterTasks.Add(Task.Run(() => contador++));
+}
+await Task.WhenAll(counterTasks);
+
+Console.WriteLine(contador);
+//va a dar un poco menos de 1000
+
+Console.WriteLine("Interlocked");
+contador = 0;
+counterTasks = new List<Task>();
+time.Restart();
+for (int i = 0; i < 1000; i++)
+{
+    counterTasks.Add(Task.Run(() => Interlocked.Increment(ref contador)));
+}
+await Task.WhenAll(counterTasks);
+Console.WriteLine(time.ElapsedMilliseconds);
+Console.WriteLine(contador);
+//va a dar 1000
+
+
+Console.WriteLine("Lock");
+contador = 0;
+counterTasks = new List<Task>();
+object gate = new();
+time.Restart();
+for (int i = 0; i < 1000; i++)
+{
+    counterTasks.Add(Task.Run(() =>
+    {
+        lock (gate)
+        {
+            contador++;
+        }
+    }));
+}
+await Task.WhenAll(counterTasks);
+Console.WriteLine(time.ElapsedMilliseconds);
+Console.WriteLine(contador);
+//va a dar 1000
+
+//que carajo se cuanto tarda cada uno
+
 
 
 
