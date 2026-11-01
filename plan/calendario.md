@@ -25,12 +25,12 @@ El plan se comprime si el diagnóstico o los gates salen bien, y suma puentes si
 | Mié 28/10 | Preparación y simulacro de screening. Diagnóstico (si hay energía; si no, pasa al jueves a la tarde) | Pitch grabado |
 | Jue 29/10 | Mañana sin estudio nuevo. Tarde: bloque 1 (colecciones, generics, delegates, LINQ) | Ejercicio con tiempo |
 | Sáb 31/10 tarde | Bloque 1: records, nullable, `IDisposable`, excepciones, Framework vs .NET moderno | — |
-| Dom 1/11 | Gate 1 y bloque 2 (primera parte) | Gate 1 |
-| Mar 3/11 | Recuperación, bloque 2 (segunda parte) y gate 2 | Gate 2 |
+| Dom 1/11 | Mini diagnóstico de POO, colecciones y restricciones de genéricos, gate 1 | Gate 1 |
+| Mar 3/11 | Recuperación, cierre del bloque 2 (`ConfigureAwait`, `ValueTask`) y gate 2 | Gate 2 |
 | Mié 4/11 | Bloque 3: pipeline, DI, configuración, validación, errores | Endpoint desde cero |
-| Jue 5/11 | Bloque 3: REST y JWT | Gate 3 |
+| Jue 5/11 | Bloque 3: REST y JWT. Bloque 3b: SOLID | Gate 3 |
 | *Vie 6 – Lun 9* | *Corte* | |
-| Mar 10/11 | Recuperación larga, SQL puro | Queries con tiempo |
+| Mar 10/11 | Recuperación larga, bloque 3b: patrones. SQL puro | Gate 3b, queries con tiempo |
 | Mié 11/11 | EF Core | Ejercicios |
 | Jue 12/11 | EF Core avanzado, simulacro endpoint + SQL | Gate 4 |
 | Sáb 14/11 tarde | Bloque 5 conceptual | Diagrama explicado en voz alta |
