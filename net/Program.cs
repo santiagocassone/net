@@ -295,7 +295,8 @@ async Task ProcessNumber(int number)
 var numberTasks = new List<Task>();
 for (int i = 0; i < 9; i++)
 {
-    numberTasks.Add(Task.Run(() => ProcessNumber(i)));
+    var num = i;
+    numberTasks.Add(ProcessNumber(num));
 }
 await Task.WhenAll(numberTasks);
 ///tres Entra al principio, tarda 3 segundos en total
@@ -306,12 +307,18 @@ int contador = 0;
 List<Task> counterTasks = new List<Task>();
 for (int i = 0; i < 1000; i++)
 {
-    counterTasks.Add(Task.Run(() => contador++));
+    counterTasks.Add(Task.Run(() =>
+    {
+        for (int j = 0; j < 1000; j++)
+        {
+            contador++;
+        }
+    }));
 }
 await Task.WhenAll(counterTasks);
 
 Console.WriteLine(contador);
-//va a dar un poco menos de 1000
+//va a dar algo menos de 1000000
 
 Console.WriteLine("Interlocked");
 contador = 0;
@@ -319,12 +326,20 @@ counterTasks = new List<Task>();
 time.Restart();
 for (int i = 0; i < 1000; i++)
 {
-    counterTasks.Add(Task.Run(() => Interlocked.Increment(ref contador)));
+    counterTasks.Add(Task.Run(() =>
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            Interlocked.Increment(ref contador);
+        }
+    }));
 }
+    
+
 await Task.WhenAll(counterTasks);
 Console.WriteLine(time.ElapsedMilliseconds);
 Console.WriteLine(contador);
-//va a dar 1000
+//va a dar 1000000
 
 
 Console.WriteLine("Lock");
@@ -336,16 +351,20 @@ for (int i = 0; i < 1000; i++)
 {
     counterTasks.Add(Task.Run(() =>
     {
-        lock (gate)
+        for (int j = 0; j < 1000; j++)
         {
-            contador++;
+            lock (gate)
+            {
+                contador++;
+            }
         }
+        
     }));
 }
 await Task.WhenAll(counterTasks);
 Console.WriteLine(time.ElapsedMilliseconds);
 Console.WriteLine(contador);
-//va a dar 1000
+//va a dar 1000000
 
 //que carajo se cuanto tarda cada uno
 
