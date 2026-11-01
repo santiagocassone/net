@@ -48,13 +48,13 @@
         }
         public void AddPlayer(string name)
         {
-            if (Spots < _players.Count)
+            if (Spots > _players.Count)
             {
                 _players.Add(name);
             } 
             else
             {
-                throw new Exception();
+                throw new InvalidOperationException("No more spots available");
             }
         }
     }
