@@ -8,6 +8,7 @@ public static class Collections
         HashSet<int> intHash = new();
         for (int i = 0; i < 100000; i++)
         {
+            intHash.Add(i);
             intList.Add(i);
         }
 
@@ -17,7 +18,7 @@ public static class Collections
             intList.Contains(i);
         }
         Console.WriteLine("List Elapsed");
-        Console.WriteLine(chron.ElapsedMilliseconds);
+        Console.WriteLine(chron.Elapsed.TotalMilliseconds);
 
         chron.Restart();
         for (int i = 0; i < 10000; i++)
@@ -25,7 +26,7 @@ public static class Collections
             intHash.Contains(i);
         }
         Console.WriteLine("HashSet Elapsed");
-        Console.WriteLine(chron.ElapsedMilliseconds);
+        Console.WriteLine(chron.Elapsed.TotalMilliseconds);
         // sin herramientas para estimar, diógenes
 
         HashSet<Club> clubs = new();
@@ -34,7 +35,7 @@ public static class Collections
         Console.WriteLine(clubs.Count);
         //1
 
-        List<ClubClass> clubsByClass = new();
+        HashSet<ClubClass> clubsByClass = new();
         clubsByClass.Add(new ClubClass() { city = "A", name = "Buenos Aires" });
         clubsByClass.Add(new ClubClass() { city = "A", name = "Buenos Aires" });
         Console.WriteLine(clubsByClass.Count);
