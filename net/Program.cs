@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 
 OOP.Run();
 Collections.Run();
+Gate1.Run();
 
 //var today = DateTime.Today;
 
