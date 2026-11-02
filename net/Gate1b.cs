@@ -28,10 +28,10 @@
         var quoteFind = repository.Find("asdf");
         if (quoteFind != null)
         {
-            Console.WriteLine($"Customer: {quoteFind.CustomerName} - Total: {quoteFind.QuoteLines.Select(q => q.Value).Sum(v => v.price * v.quantity)}");
+            Console.WriteLine($"Customer: {quoteFind.CustomerName} - Total: {quoteFind.Total}");
         }
         var unexistingQuoteFind = repository.Find("fghj");
-        var codeQuantity = repository.Items.SelectMany(i => i.QuoteLines).Select(ql => ql.Value).GroupBy(v => v.code).Select(g => new { Code = g.Key, Quantity = g.Sum(x => x.quantity) }).Take(3).OrderByDescending(s => s.Quantity);
+        var codeQuantity = repository.Items.SelectMany(i => i.QuoteLines).Select(ql => ql.Value).GroupBy(v => v.code).Select(g => new { Code = g.Key, Quantity = g.Sum(x => x.quantity) }).OrderByDescending(s => s.Quantity).Take(3);
 
         foreach (var item in codeQuantity)
         {
@@ -51,6 +51,7 @@
         private readonly string _code;
         private readonly string _customerName;
         private readonly int _maxQuoteLines;
+        public decimal Total => _quoteLines.Select(q => q.Value).Sum(v => v.price * v.quantity);
         public string Code => _code;
         public string CustomerName => _customerName;
         public int MaxQuoteLines => _maxQuoteLines;
@@ -77,7 +78,7 @@
             }
             else
             {
-                throw new InvalidOperationException("Unable to insert Quote. Maximum lines reached");
+                throw new QuoteLimitExeeded("Unable to insert Quote. Maximum lines reached");
             }
         }
 
@@ -89,5 +90,10 @@
         public void Add(T item) => _items.Add(item.Code, item);
         public T? Find(string code) => _items.GetValueOrDefault(code);
         public IReadOnlyCollection<T> Items => _items.Values;
+    }
+
+    class QuoteLimitExeeded : Exception
+    {
+        public QuoteLimitExeeded(string message) : base(message) { }
     }
 }
