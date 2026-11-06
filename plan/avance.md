@@ -6,6 +6,10 @@ Se lee primero al retomar. Lo actualiza Claude al cerrar cada sesión, reemplaza
 
 Simplificada a pedido de Santi: un tema por vez, explicado a fondo con ejemplos; práctica solo donde suma (ASP.NET Core, SQL, EF); al inicio de cada sesión 3-4 preguntas rápidas de temas anteriores; sin hablar de gates ni bloques con Santi. Dos líneas en paralelo: fundamentos de C#/.NET (huecos) y temas senior de la JD. El seguimiento interno sigue en esta tabla.
 
+## Cambio de enfoque (5/11)
+
+Objetivo: semi senior. Prioridad: formación. Práctica construyendo el backend de Comunidad Pádel desde cero (ver `proyecto.md`), con unos 10-20 endpoints. Sin front. Double Nines nunca llamó para la técnica: sin fecha.
+
 ## Estado
 
 | # | Bloque | Estado | Gate | Notas |
