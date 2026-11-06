@@ -1,6 +1,6 @@
 # Proyecto: backend de Comunidad Pádel desde cero
 
-Objetivo: aprender .NET a nivel semi senior construyendo una API real, y practicar live coding de endpoints. Solo backend; el front no se toca.
+Objetivo: pasar una entrevista técnica de backend .NET semi senior (preguntas conceptuales, repreguntas y, si toca, live coding). El proyecto es el medio para aprender y practicar los conceptos. Solo backend; el front no se toca.
 
 ## Reglas
 
